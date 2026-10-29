@@ -1,6 +1,11 @@
 const el = id => document.getElementById(id);
 const weatherCodes = {0:['Clear sky','☀'],1:['Mostly clear','⛅'],2:['Partly cloudy','⛅'],3:['Overcast','☁'],45:['Foggy','〰'],48:['Foggy','〰'],51:['Light drizzle','🌦'],53:['Drizzle','🌦'],55:['Heavy drizzle','🌧'],61:['Light rain','🌦'],63:['Rain','🌧'],65:['Heavy rain','🌧'],71:['Light snow','❄'],73:['Snow','❄'],75:['Heavy snow','❄'],80:['Rain showers','🌦'],81:['Rain showers','🌧'],82:['Heavy showers','🌧'],95:['Thunderstorm','⚡']};
 let state = {timezone:'auto'};
+const savedTheme = localStorage.getItem('weatherly-theme');
+if (savedTheme === 'dark') document.body.classList.add('dark');
+function updateThemeButton(){const dark=document.body.classList.contains('dark');el('theme-toggle').textContent=dark?'○ Light UI':'◐ Dark UI';el('theme-toggle').setAttribute('aria-label',dark?'Switch to light mode':'Switch to dark mode');}
+el('theme-toggle').addEventListener('click',()=>{const dark=document.body.classList.toggle('dark');localStorage.setItem('weatherly-theme',dark?'dark':'light');updateThemeButton();});
+updateThemeButton();
 const fmt = (date, options, tz=state.timezone) => new Intl.DateTimeFormat('en-US',{timeZone:tz,...options}).format(new Date(date));
 function icon(code){return weatherCodes[code] || ['Cloudy','☁'];}
 function render(data, place){
