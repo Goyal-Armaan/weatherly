@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A focused weather and local-time dashboard." />
+    <title>Weatherly — Weather & Time</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header>
+        <a class="brand" href="."><span class="brand-mark">◒</span> weatherly</a>
+        <button class="location-button" id="use-location" type="button">◎ Use my location</button>
+      </header>
+
+      <section class="hero" aria-labelledby="place-name">
+        <div class="search-wrap">
+          <label class="sr-only" for="city-search">Find a city</label>
+          <input id="city-search" type="search" placeholder="Search for a city…" autocomplete="off" />
+          <div class="results" id="results" role="listbox"></div>
+        </div>
+        <p class="eyebrow" id="date-line">Loading location</p>
+        <h1 id="place-name">Weather, wherever you are.</h1>
+        <p class="subtitle" id="condition-line">Finding the forecast…</p>
+      </section>
+
+      <section class="dashboard" aria-live="polite">
+        <article class="current card">
+          <div class="current-top"><span>NOW</span><span id="weather-icon" aria-hidden="true">☀</span></div>
+          <div class="temperature"><span id="temperature">--</span><sup>°</sup></div>
+          <p>Feels like <strong id="feels-like">--°</strong></p>
+          <div class="sun-times"><span>↑ Sunrise <strong id="sunrise">--:--</strong></span><span>↓ Sunset <strong id="sunset">--:--</strong></span></div>
+        </article>
+
+        <article class="time card">
+          <div class="card-label">LOCAL TIME</div>
+          <div class="clock" id="clock">--:--</div>
+          <p id="timezone">—</p>
+          <div class="time-zone-line"></div>
+          <p class="mono" id="utc-offset">UTC —</p>
+        </article>
+
+        <article class="details card">
+          <div class="card-label">DETAILS</div>
+          <dl>
+            <div><dt>Humidity</dt><dd id="humidity">—</dd></div>
+            <div><dt>Wind</dt><dd id="wind">—</dd></div>
+            <div><dt>Precipitation</dt><dd id="rain">—</dd></div>
+          </dl>
+        </article>
+      </section>
+
+      <section class="forecast-section" aria-labelledby="forecast-title">
+        <div class="section-heading"><h2 id="forecast-title">Next 7 days</h2><span>Daily forecast</span></div>
+        <div class="forecast" id="forecast"></div>
+      </section>
+      <p class="source">Weather data by <a href="https://open-meteo.com/" target="_blank" rel="noreferrer">Open-Meteo</a></p>
+    </main>
+    <template id="day-template"><article class="day"><span class="day-name"></span><span class="day-icon"></span><div><strong class="day-high"></strong><span class="day-low"></span></div></article></template>
+    <script src="app.js"></script>
+  </body>
+</html>
